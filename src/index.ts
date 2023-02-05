@@ -1,25 +1,18 @@
-import express, { Express, Request, Response } from 'express';
-// get, post, put, delete
+import express, { Express } from 'express';
+import { notUsed } from './controllers/controllerTest';
+import CustomerController from './controllers/CustomerController';
+
 const app: Express = express();
-const PORT = 8000;
+const PORT = 8091;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, World!');
-});
+// Enable JSON Request body parsing
+app.use(express.json());
 
+app.get('/api/customers', CustomerController.getAllCustomers);
+app.post('/api/customers', CustomerController.createNewCustomer);
+
+app.get('/api/customers/:customerName', notUsed);
+// GET http://localhost:8091/api/customer/Alice
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});
-
-type NewProductRequest = {
-  id: string;
-  color: string;
-};
-
-app.post('/products', (req, res) => {
-  const { id, color } = req.query as NewProductRequest;
-
-  console.log(`id: ${id}`);
-  console.log(`color: ${color}`);
-  res.sendStatus(200);
+  console.log(`server listening on ${PORT}`);
 });
