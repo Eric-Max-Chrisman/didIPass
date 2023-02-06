@@ -1,18 +1,25 @@
 import express, { Express } from 'express';
-import { notUsed } from './controllers/controllerTest';
-import CustomerController from './controllers/CustomerController';
+import { placeHolder } from './controllers/studentController';
 
 const app: Express = express();
 const PORT = 8091;
-
-// Enable JSON Request body parsing
 app.use(express.json());
 
-app.get('/api/customers', CustomerController.getAllCustomers);
-app.post('/api/customers', CustomerController.createNewCustomer);
+// Create Student - TODO
+app.post('/api/students', placeHolder);
 
-app.get('/api/customers/:customerName', notUsed);
-// GET http://localhost:8091/api/customer/Alice
+// Get Student Data - TODO
+app.get('/api/students/:studentName', placeHolder);
+
+// Get Final - TODO
+app.get('/api/students/:studentName/finalExam', placeHolder);
+
+// Calculate Student Overall Grade - TODO
+app.post('/api/students/:studentName/finalExam', placeHolder);
+
+// Update/Add Student Grade
+app.post('/api/students/:studentName/grade/:assignmentName', placeHolder);
+
 app.listen(PORT, () => {
-  console.log(`server listening on ${PORT}`);
+  console.log(`Using Port ${PORT}`);
 });
